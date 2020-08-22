@@ -4,12 +4,11 @@ const addUser = ({ id, name, room }) => {
   name = name.trim().toLowerCase();
   room = room.trim().toLowerCase();
 
-  const existingUser = users.find(
-    (user) => user.room === room && user.name === name
-  );
+  const existingUser = users.find((user) => user.room === room && user.name === name);
 
-  if (!name || !room) return { error: "Username and room are required." };
-  if (existingUser) return { error: "Username is taken." };
+  if (!name || !room) return { error: 'ユーザ名と部屋名を入力してください' };
+  if (existingUser)
+    return { error: 'このユーザ名は既に使われています。別のユーザ名を使用してください' };
 
   const user = { id, name, room };
 

@@ -20,12 +20,12 @@ io.on('connection', (socket) => {
     if (error) return callback(error);
 
     socket.emit('message', {
-      user: 'admin',
-      text: `${user.name}, welcome to the room ${user.room}`,
+      user: 'Chatbot',
+      text: `${user.name}さん、部屋「${user.room}」へようこそ！`,
     });
     socket.broadcast
       .to(user.room)
-      .emit('message', { user: 'admin', text: `${user.name} has joined!` });
+      .emit('message', { user: 'Chatbot', text: `${user.name} さんが入室しました` });
 
     socket.join(user.room);
 
@@ -61,8 +61,8 @@ io.on('connection', (socket) => {
 
     if (user) {
       io.to(user.room).emit('message', {
-        user: 'admin',
-        text: `${user.name} has left.`,
+        user: 'Chatbot',
+        text: `${user.name} さんが退出しました。`,
       });
     }
   });
