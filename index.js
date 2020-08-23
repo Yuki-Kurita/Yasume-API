@@ -55,6 +55,18 @@ io.on('connection', (socket) => {
     io.to(user.room).emit('timer', { second: second });
   });
 
+  // 稼働状況が送られてきた時
+  socket.on('sendWorkingStatus', (status) => {
+    const user = getUser(socket.id);
+    io.to(user.room).emit('status', status);
+  });
+
+  // buttonのdisable状態が送られてきた時
+  socket.on('sendDisabledButton', (disabledButton) => {
+    const user = getUser(socket.id);
+    io.to(user.room).emit('disabledButton', disabledButton);
+  });
+
   socket.on('disconnect', () => {
     const user = removeUser(socket.id);
 
